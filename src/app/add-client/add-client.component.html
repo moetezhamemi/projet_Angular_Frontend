@@ -1,0 +1,39 @@
+<div class="container">
+    <div>
+        <h2>Ajouter un client :</h2>
+    </div>
+    <form>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID client</label>
+            <input type="text" [(ngModel)]="newclient.idclient" name="idclient" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom client</label>
+            <input type="text" [(ngModel)]="newclient.nomclient" name="nomclient" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>email du client</label>
+            <input type="email" [(ngModel)]="newclient.emailclient" name="emailclient" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date Inscription</label>
+            <input type="date" [(ngModel)]="newclient.dateinscription" name="dateinscription" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>adresse client</label>
+            <input type="string" [(ngModel)]="newclient.adresseclient" name="adresseclient" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>type</label>
+            <select class="form-control form-control-lg" id="idtype" name="idtype"
+            [(ngModel)]="newidtype">
+             <option *ngFor="let type of types" [value]="type.idtype" >
+             {{type.nomtype}}
+            </option>
+            </select>
+            </div>
+        <div class="mt-2">
+            <button type="submit" (click)="addclient()" class="btn btn-success">Ajouter</button>
+        </div>
+    </form>
+</div>
