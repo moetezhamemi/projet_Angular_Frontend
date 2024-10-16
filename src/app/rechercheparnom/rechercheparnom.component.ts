@@ -13,7 +13,7 @@ export class RechercheparnomComponent {
   searchTerm! : string;
   constructor(private clientService: ClientService) {}
     ngOnInit(): void {
-    this.clients = this.clientService.listeclients();
+    this./*all*/clients = this.clientService.listeclients();
     console.log(this.allclients); 
   }
   supprimerclient(c: client) {
