@@ -14,12 +14,12 @@ export class ClientService {
     this.types = [ {idtype : 1, nomtype : "premium"},
       {idtype : 2, nomtype : "Normal"}]; 
       this.clients = [
-        { idclient : 1, nomclient : "tez", emailclient : "jjj@gmail.com",
-        dateinscription : new Date("01/10/2011"),adresseclient : "daar", type : {idtype : 1, nomtype : "Premium"}},
-        { idclient : 2, nomclient : "ali", emailclient : "kkk@gmail.com",
-          dateinscription : new Date("01/8/2011"),adresseclient : "dar", type : {idtype : 2, nomtype : "Normal"}},
-          { idclient : 3, nomclient : "salah", emailclient : "lll@gmail.com",
-            dateinscription : new Date("01/12/2011"),adresseclient : "maison", type : {idtype : 2, nomtype : "Normal"}},
+        { idclient : 1, nomclient : "tez", emailclient : "tez1@gmail.com",
+        dateinscription : new Date("01/10/2021"),adresseclient : "nabeul", type : {idtype : 1, nomtype : "Premium"}},
+        { idclient : 2, nomclient : "ali", emailclient : "ali1@gmail.com",
+          dateinscription : new Date("01/8/2022"),adresseclient : "tunis", type : {idtype : 2, nomtype : "Normal"}},
+          { idclient : 3, nomclient : "salah", emailclient : "salah1@gmail.com",
+            dateinscription : new Date("11/8/2022"),adresseclient : "kelibia", type : {idtype : 2, nomtype : "Normal"}},
         ];
         
    }
