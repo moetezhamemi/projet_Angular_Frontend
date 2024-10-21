@@ -80,4 +80,8 @@ export class ClientService {
     return this.clientrecherche;
       
     }
+    public idExists(idclient: string): boolean {
+      const idAsNumber = Number(idclient);
+      return this.clients.some(client => client.idclient === idAsNumber); 
+  }
 }

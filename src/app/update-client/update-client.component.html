@@ -1,39 +1,61 @@
-<div class="container">
+<div class="container mt-4">
     <div>
         <h2>Modifier un client :</h2>
     </div>
-    <form>
-        <div  class="col-sm-2 col-md-2 col-lg-2">
+    <form [formGroup]="clientForm" (ngSubmit)="updateclient()" novalidate>
+        <div class="col-sm-2 col-md-2 col-lg-2">
             <label>ID client</label>
-            <input readonly type="text" [(ngModel)]="cc.idclient" name="idclient" class="form-control">
+            <input formControlName="idclient" class="form-control" readonly>
         </div>
+
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Nom client</label>
-            <input type="text" [(ngModel)]="cc.nomclient" name="nomProduit" class="form-control">
+            <input formControlName="nomclient" class="form-control">
+            <div *ngIf="clientForm.controls['nomclient'].invalid && clientForm.controls['nomclient'].touched" class="text-danger">
+                <div *ngIf="clientForm.controls['nomclient'].errors?.['required']">Nom client est obligatoire.</div>
+                <div *ngIf="clientForm.controls['nomclient'].errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</div>
+                <div *ngIf="clientForm.controls['nomclient'].errors?.['hasNumber']">Le nom ne doit pas contenir de chiffres.</div>
+            </div>
         </div>
+
         <div class="col-sm-2 col-md-2 col-lg-2">
-            <label>email</label>
-            <input type="text" [(ngModel)]="cc.emailclient" name="emailclient" class="form-control">
+            <label>Email</label>
+            <input formControlName="emailclient" class="form-control">
+            <div *ngIf="clientForm.controls['emailclient'].invalid && clientForm.controls['emailclient'].touched" class="text-danger">
+                <div *ngIf="clientForm.controls['emailclient'].errors?.['required']">L'email est obligatoire.</div>
+                <div *ngIf="clientForm.controls['emailclient'].errors?.['email']">Veuillez entrer un email valide.</div>
+            </div>
         </div>
+
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Date inscription</label>
-            <input type="date" [ngModel]="cc.dateinscription | date: 'yyyy-MM-dd'"
-                (ngModelChange)=" cc.dateinscription= $event" name="dateCreation" class="form-control">
+            <label>Date d'inscription</label>
+            <input formControlName="dateinscription" type="date" class="form-control">
+            <div *ngIf="clientForm.controls['dateinscription'].invalid && clientForm.controls['dateinscription'].touched" class="text-danger">
+                La date d'inscription est obligatoire.
+            </div>
         </div>
+
         <div class="col-sm-2 col-md-2 col-lg-2">
-            <label>adresse</label>
-            <input type="text" [(ngModel)]="cc.adresseclient" name="adresseclient" class="form-control">
+            <label>Adresse</label>
+            <input formControlName="adresseclient" class="form-control">
+            <div *ngIf="clientForm.controls['adresseclient'].invalid && clientForm.controls['adresseclient'].touched" class="text-danger">
+                L'adresse est obligatoire.
+            </div>
         </div>
+
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>type </label>
-            <select class="form-control form-control-lg" id="idtype" name="idtype"
-            [(ngModel)]="updatedtypeid">
-                <option *ngFor="let type of types" [value]="type.idtype" >
-                {{type.nomtype}}
-                </option>
+            <label>Type</label>
+            <select formControlName="idtype" class="form-control form-control-lg">
+                <option value="" disabled>Sélectionner un type</option>
+                <option *ngFor="let type of types" [value]="type.idtype">{{ type.nomtype }}</option>
             </select>
-        <div class="mt-2">
-            <button type="submit" (click)="updateclient()" class="btn btn-success">Modifer</button>
+            <div *ngIf="clientForm.controls['idtype'].invalid && clientForm.controls['idtype'].touched" class="text-danger">
+                Le type est obligatoire.
+            </div>
         </div>
-    </div>
-</form>
+
+        <div class="mt-2">
+            <button type="submit" class="btn btn-success" [disabled]="clientForm.invalid">Modifier</button>
+        </div>
+    </form>
+</div>
