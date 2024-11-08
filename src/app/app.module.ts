@@ -11,6 +11,8 @@ import { RecherchepartypeComponent } from './recherchepartype/recherchepartype.c
 import { RouterModule } from '@angular/router';
 import { RechercheparnomComponent } from './rechercheparnom/rechercheparnom.component';
 import { SearchfilterPipe } from './searchfilter.pipe';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { SearchfilterPipe } from './searchfilter.pipe';
     RecherchepartypeComponent,
     RechercheparnomComponent,
     SearchfilterPipe,
+    LoginComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

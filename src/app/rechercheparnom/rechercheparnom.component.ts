@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ClientService } from '../services/client.service';
 import { client } from '../model/client.model';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-rechercheparnom',
   templateUrl: './rechercheparnom.component.html',
@@ -11,7 +13,7 @@ export class RechercheparnomComponent {
   allclients! : client[];
   clients! : client[];
   searchTerm! : string;
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService,private router :Router, public authservice: AuthService) {}
     ngOnInit(): void {
     this./*all*/clients = this.clientService.listeclients();
     console.log(this.allclients); 

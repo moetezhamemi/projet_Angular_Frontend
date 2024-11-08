@@ -27,8 +27,8 @@
                         <td>{{client.dateinscription | date:'dd/MM/yyyy'}}</td>
                         <td>{{client.adresseclient}}</td>
                         <td>{{client.type.nomtype}}</td>
-                        <td><a class="btn btn-danger" (click)="supprimerclient(client)">Supprimer</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateclient',client.idclient]">Modifier</a></td>
+                        <td><a *ngIf="authservice.isAdmin()" class="btn btn-danger" (click)="supprimerclient(client)">Supprimer</a></td>
+                        <td><a *ngIf="authservice.isAdmin()" class="btn btn-success" [routerLink]="['/updateclient',client.idclient]">Modifier</a></td>
                     </tr>
                 </tbody>
             </table>
