@@ -57,13 +57,14 @@ export class ClientService {
           return 0;
         });
       }
-    updateclient(c:client)
-    {
-    // console.log(c);
-    this.supprimerclient(c);
-    this.ajouterclient(c);
-    this.trierclients();
-    }
+      updateclient(c: client) {
+        const index = this.clients.findIndex(cli => cli.idclient === c.idclient);
+        if (index !== -1) {
+          this.clients[index] = c; 
+          this.trierclients();       
+        }
+      }
+      
     listetype(): Type[] {
       return this.types;
       }

@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { clientGuard } from './client.guard';
 const routes: Routes = [{path: "clients", component : ClientsComponent},
-  { path: "add-client", component: AddClientComponent, canActivate: [clientGuard] },
+  { path: "add-client", component: AddClientComponent,canActivate: [clientGuard]},
   {path : "", redirectTo:"clients", pathMatch:"full"},
   {path: "updateclient/:id", component: UpdateClientComponent,canActivate: [clientGuard]},
   {path: "recherchepartype",component: RecherchepartypeComponent},

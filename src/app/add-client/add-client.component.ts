@@ -59,6 +59,7 @@ export class AddClientComponent implements OnInit {
       this.newclient.type = this.clientService.consultertype(this.clientForm.value.idtype);
       this.clientService.ajouterclient(this.newclient);
       this.router.navigate(['clients']);
+      this.clientService.trierclients();
     }
   }
 }
