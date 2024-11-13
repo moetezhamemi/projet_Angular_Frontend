@@ -8,7 +8,10 @@ import { RechercheparnomComponent } from './rechercheparnom/rechercheparnom.comp
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { clientGuard } from './client.guard';
-const routes: Routes = [{path: "clients", component : ClientsComponent},
+import { ListetypeComponent } from './listetype/listetype.component';
+import { UpdateTypeComponent } from './update-type/update-type.component';
+const routes: Routes = [
+  {path: "clients", component : ClientsComponent},
   { path: "add-client", component: AddClientComponent,canActivate: [clientGuard]},
   {path : "", redirectTo:"clients", pathMatch:"full"},
   {path: "updateclient/:id", component: UpdateClientComponent,canActivate: [clientGuard]},
@@ -16,8 +19,8 @@ const routes: Routes = [{path: "clients", component : ClientsComponent},
   {path: "rechercheparnom", component : RechercheparnomComponent},
   {path: 'login', component: LoginComponent},
   {path: 'forbidden', component: ForbiddenComponent},
-
-
+  {path: 'listetype', component: ListetypeComponent,canActivate: [clientGuard]},
+  {path: 'updatetype',component: UpdateTypeComponent,canActivate : [clientGuard]}
  ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

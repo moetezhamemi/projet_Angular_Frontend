@@ -21,10 +21,11 @@
           Clients
         </a>
         <div class="dropdown-menu">
-          <a a *ngIf="authService.isAdmin()" class="dropdown-item" href="#" routerLink="/add-client">Ajouter</a>
+          <a *ngIf="authService.isAdmin()" class="dropdown-item" href="#" routerLink="/add-client">Ajouter</a>
           <a class="dropdown-item" href="#">Lister</a>
           <a class="dropdown-item" routerLink="/recherchepartype" >Recherche Par type</a>
           <a class="dropdown-item" routerLink="/rechercheparnom" >Recherche Par Nom</a>
+          <a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/listetype" >Gestion des types</a>
         </div>
       </li>
     </ul>

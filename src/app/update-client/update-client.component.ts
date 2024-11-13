@@ -23,11 +23,9 @@ export class UpdateClientComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Récupérer le client et les types
     this.types = this.clientService.listetype();
     this.cc = this.clientService.consulterclient(this.activatedRoute.snapshot.params['id']);
 
-    // Initialiser le formulaire réactif
     this.clientForm = this.fb.group({
       idclient: [{ value: this.cc.idclient, disabled: true }],
       nomclient: [this.cc.nomclient, [Validators.required, Validators.minLength(3), this.noNumbersValidator()]],

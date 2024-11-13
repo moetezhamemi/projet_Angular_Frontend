@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { client } from '../model/client.model';
 import { Type } from '../model/type.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +27,8 @@ export class ClientService {
    }
    ajouterclient(client : client){
     this.clients.push(client);
+    this.trierclients();
+
    }
    supprimerclient(cli: client){
     //supprimer le produit prod du tableau produits
@@ -64,7 +65,6 @@ export class ClientService {
           this.trierclients();       
         }
       }
-      
     listetype(): Type[] {
       return this.types;
       }
@@ -84,5 +84,13 @@ export class ClientService {
     public idExists(idclient: string): boolean {
       const idAsNumber = Number(idclient);
       return this.clients.some(client => client.idclient === idAsNumber); 
+  }
+  ajoutertype(tt : Type): Type
+  {
+    const id = this.types.length > 0?Math.max(...this.types.map(Type => Type.idtype ?? 0)) + 1 : 1 ;
+    tt.idtype = id;
+    this.types.push(tt);
+    return tt;
+
   }
 }
