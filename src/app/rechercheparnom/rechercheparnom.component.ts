@@ -15,16 +15,30 @@ export class RechercheparnomComponent {
   searchTerm! : string;
   constructor(private clientService: ClientService,private router :Router, public authservice: AuthService) {}
     ngOnInit(): void {
-    this./*all*/clients = this.clientService.listeclients();
+    //this./*all*/clients = this.clientService.listeclients();
     console.log(this.allclients); 
   }
   supprimerclient(c: client) {
-    //console.log(p);
     let conf = confirm("Etes-vous sûr ?");
-    if (conf){
-         this.clientService.supprimerclient(c);
- }
-}
+    if (conf) {
+      if (c.idclient !== undefined && !isNaN(c.idclient)) {
+        this.clientService.supprimerclient(c.idclient).subscribe(() => {
+          console.log('Client supprimé');
+          this.chargerclients();
+        });
+      } else {
+        console.error('ID du client invalide');
+      }
+    }
+  }
+  chargerclients()
+  {
+    this.clientService.listeclients().subscribe(cls => {
+      console.log(cls);
+      this.clients = cls;
+    });
+  }
+  
 onKeyUp(filterText : string){
   this.clients = this.allclients.filter(item =>
   item.nomclient!.toLowerCase().includes(filterText));

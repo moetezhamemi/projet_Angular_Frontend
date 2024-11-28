@@ -23,6 +23,7 @@ export class AddClientComponent implements OnInit {
   types!: Type[];
   newclient = new client();
   idError: boolean = false;
+  newidtype! : number;
 
   constructor(
     private fb: FormBuilder,
@@ -31,9 +32,12 @@ export class AddClientComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.types = this.clientService.listetype();
+    //this.types = this.clientService.listetype();*
+    this.clientService.listetype().
+    subscribe(types => {this.types = types._embedded.types;
+      console.log(types);
+    });
     this.clientForm = this.fb.group({
-      idclient: ['', Validators.required],
       nomclient: ['', [Validators.required, noNumbersValidator()]], 
       emailclient: ['', [Validators.required, Validators.email]],
       dateinscription: ['', Validators.required],
@@ -48,18 +52,18 @@ export class AddClientComponent implements OnInit {
 
   addclient() {
     if (this.clientForm.valid) {
-      const idclient = this.clientForm.value.idclient;
-      if (this.clientService.idExists(idclient)) {
-        this.idError = true;
-        return;
-      }
-      this.idError = false;
-
       this.newclient = this.clientForm.value;
-      this.newclient.type = this.clientService.consultertype(this.clientForm.value.idtype);
-      this.clientService.ajouterclient(this.newclient);
-      this.router.navigate(['clients']);
-      this.clientService.trierclients();
+      console.log('newidtype:', this.newidtype);
+      this.newclient.type = this.types.find(type => type.idtype == this.newidtype)!;
+      this.clientService.ajouterclient(this.newclient).subscribe(
+        cl => {
+          console.log('Client ajouté avec succès:', cl); 
+          this.router.navigate(['clients']); 
+        }
+      );
     }
   }
+  
+  
+  
 }

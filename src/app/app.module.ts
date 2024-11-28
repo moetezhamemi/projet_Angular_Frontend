@@ -14,8 +14,8 @@ import { SearchfilterPipe } from './searchfilter.pipe';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ListetypeComponent } from './listetype/listetype.component';
-import { UpdateTypeComponent } from './update-type/update-type.component';
-
+import { UpdateTypeComponent } from './update-type/update-type.component'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { UpdateTypeComponent } from './update-type/update-type.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

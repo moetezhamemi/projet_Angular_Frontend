@@ -4,6 +4,7 @@ import { ClientService } from '../services/client.service';
 import { Type } from '../model/type.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ClientsComponent } from '../clients/clients.component';
 @Component({
   selector: 'app-recherchepartype',
   templateUrl: './recherchepartype.component.html',
@@ -17,16 +18,29 @@ export class RecherchepartypeComponent {
     private router :Router, public authservice: AuthService){}
   ngOnInit():void{
     this.clients = [];
-    this.types = this.clientService.listetype();
+    //this.types = this.clientService.listetype();
   }
   supprimerclient(c: client) {
-    //console.log(p);
     let conf = confirm("Etes-vous sûr ?");
-    if (conf){
-         this.clientService.supprimerclient(c);
-         this.clients = this.clientService.recherchepartype(this.Idtype);
- }
-}
+    if (conf) {
+      if (c.idclient !== undefined && !isNaN(c.idclient)) {
+        this.clientService.supprimerclient(c.idclient).subscribe(() => {
+          console.log('Client supprimé');
+          this.chargerclients();
+        });
+      } else {
+        console.error('ID du client invalide');
+      }
+    }
+  }
+  chargerclients()
+  {
+    this.clientService.listeclients().subscribe(cls => {
+      console.log(cls);
+      this.clients = cls;
+    });
+  }
+  
  onchange()
  {
   console.log(this.Idtype);

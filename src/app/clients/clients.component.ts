@@ -9,16 +9,35 @@ import { ClientService } from '../services/client.service';
   styleUrl: './clients.component.css'
 })
 export class ClientsComponent {
-  clients : client[];
+  clients : client[] = [];
   constructor(private clientService: ClientService,
     private router :Router, public authservice: AuthService) {
-    this.clients = clientService.listeclients();
+    //this.clients = clientService.listeclients();
     }
-  supprimerclient(c: client) {
-   //console.log(p);
-   let conf = confirm("Etes-vous sûr ?");
-   if (conf){
-        this.clientService.supprimerclient(c);}
+    ngOnInit():void{
+      this.chargerclients();  
+      }
+supprimerclient(c: client) {
+  let conf = confirm("Etes-vous sûr ?");
+  if (conf) {
+    if (c.idclient !== undefined && !isNaN(c.idclient)) {
+      this.clientService.supprimerclient(c.idclient).subscribe(() => {
+        console.log('Client supprimé');
+        this.chargerclients();
+      });
+    } else {
+      console.error('ID du client invalide');
+    }
+  }
 }
 
+
+  chargerclients()
+  {
+    this.clientService.listeclients().subscribe(cls => {
+      console.log(cls);
+      this.clients = cls;
+    });
+  }
+ 
 }

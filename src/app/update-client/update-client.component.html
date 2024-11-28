@@ -1,61 +1,59 @@
-<div class="container mt-4">
-    <div>
-        <h2>Modifier un client :</h2>
+<div *ngIf="cc" class="container mt-4">
+  <h2>Modifier un client :</h2>
+  <form [formGroup]="clientForm" (ngSubmit)="updateclient()" novalidate>
+    <div class="mb-3">
+      <label for="idclient">ID client</label>
+      <input id="idclient" formControlName="idclient" class="form-control" readonly >
     </div>
-    <form [formGroup]="clientForm" (ngSubmit)="updateclient()" novalidate>
-        <div class="col-sm-2 col-md-2 col-lg-2">
-            <label>ID client</label>
-            <input formControlName="idclient" class="form-control" readonly>
-        </div>
+    
+    <div class="mb-3">
+      <label for="nomclient">Nom client</label>
+      <input id="nomclient" formControlName="nomclient" class="form-control">
+      <div *ngIf="clientForm.controls['nomclient'].invalid && clientForm.controls['nomclient'].touched" class="text-danger">
+        <div *ngIf="clientForm.controls['nomclient'].errors?.['required']">Nom client est obligatoire.</div>
+        <div *ngIf="clientForm.controls['nomclient'].errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</div>
+        <div *ngIf="clientForm.controls['nomclient'].errors?.['hasNumber']">Le nom ne doit pas contenir de chiffres.</div>
+      </div>
+    </div>
 
-        <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Nom client</label>
-            <input formControlName="nomclient" class="form-control">
-            <div *ngIf="clientForm.controls['nomclient'].invalid && clientForm.controls['nomclient'].touched" class="text-danger">
-                <div *ngIf="clientForm.controls['nomclient'].errors?.['required']">Nom client est obligatoire.</div>
-                <div *ngIf="clientForm.controls['nomclient'].errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</div>
-                <div *ngIf="clientForm.controls['nomclient'].errors?.['hasNumber']">Le nom ne doit pas contenir de chiffres.</div>
-            </div>
-        </div>
+    <div class="mb-3">
+      <label for="emailclient">Email</label>
+      <input id="emailclient" formControlName="emailclient" class="form-control">
+      <div *ngIf="clientForm.controls['emailclient'].invalid && clientForm.controls['emailclient'].touched" class="text-danger">
+        <div *ngIf="clientForm.controls['emailclient'].errors?.['required']">L'email est obligatoire.</div>
+        <div *ngIf="clientForm.controls['emailclient'].errors?.['email']">Veuillez entrer un email valide.</div>
+      </div>
+    </div>
 
-        <div class="col-sm-2 col-md-2 col-lg-2">
-            <label>Email</label>
-            <input formControlName="emailclient" class="form-control">
-            <div *ngIf="clientForm.controls['emailclient'].invalid && clientForm.controls['emailclient'].touched" class="text-danger">
-                <div *ngIf="clientForm.controls['emailclient'].errors?.['required']">L'email est obligatoire.</div>
-                <div *ngIf="clientForm.controls['emailclient'].errors?.['email']">Veuillez entrer un email valide.</div>
-            </div>
-        </div>
+    <div class="mb-3">
+      <label for="dateinscription">Date d'inscription</label>
+      <input id="dateinscription" formControlName="dateinscription" type="date" class="form-control">
+      <div *ngIf="clientForm.controls['dateinscription'].invalid && clientForm.controls['dateinscription'].touched" class="text-danger">
+        La date d'inscription est obligatoire.
+      </div>
+    </div>
 
-        <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Date d'inscription</label>
-            <input formControlName="dateinscription" type="date" class="form-control">
-            <div *ngIf="clientForm.controls['dateinscription'].invalid && clientForm.controls['dateinscription'].touched" class="text-danger">
-                La date d'inscription est obligatoire.
-            </div>
-        </div>
+    <div class="mb-3">
+      <label for="adresseclient">Adresse</label>
+      <input id="adresseclient" formControlName="adresseclient" class="form-control">
+      <div *ngIf="clientForm.controls['adresseclient'].invalid && clientForm.controls['adresseclient'].touched" class="text-danger">
+        L'adresse est obligatoire.
+      </div>
+    </div>
 
-        <div class="col-sm-2 col-md-2 col-lg-2">
-            <label>Adresse</label>
-            <input formControlName="adresseclient" class="form-control">
-            <div *ngIf="clientForm.controls['adresseclient'].invalid && clientForm.controls['adresseclient'].touched" class="text-danger">
-                L'adresse est obligatoire.
-            </div>
-        </div>
+    <div class="mb-3">
+      <label for="idtype">Type</label>
+      <select id="idtype" formControlName="idtype" class="form-control" [(ngModel)]=" updatedtypeid">
+        <option value="" disabled>Sélectionner un type</option>
+        <option *ngFor="let type of types" [value]="type.idtype">{{ type.nomtype }}</option>
+      </select>
+      <div *ngIf="clientForm.controls['idtype'].invalid && clientForm.controls['idtype'].touched" class="text-danger">
+        Le type est obligatoire.
+      </div>
+    </div>
 
-        <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Type</label>
-            <select formControlName="idtype" class="form-control form-control-lg">
-                <option value="" disabled>Sélectionner un type</option>
-                <option *ngFor="let type of types" [value]="type.idtype">{{ type.nomtype }}</option>
-            </select>
-            <div *ngIf="clientForm.controls['idtype'].invalid && clientForm.controls['idtype'].touched" class="text-danger">
-                Le type est obligatoire.
-            </div>
-        </div>
-
-        <div class="mt-2">
-            <button type="submit" class="btn btn-success" [disabled]="clientForm.invalid">Modifier</button>
-        </div>
-    </form>
+    <div class="mt-2">
+      <button type="submit" class="btn btn-success" [disabled]="clientForm.invalid || !cc">Modifier</button>
+    </div>
+  </form>
 </div>

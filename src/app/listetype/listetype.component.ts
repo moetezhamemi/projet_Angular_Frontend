@@ -18,13 +18,13 @@ export class ListetypeComponent implements OnInit {
   }
   ajoutertype(nouveautype : Type): void
     {
-      this.clientservice.ajoutertype(nouveautype);
+      //this.clientservice.ajoutertype(nouveautype);
       this.chargertype();
     }
   typeUpdated(tt: Type):void {
     if(this.ajout)
     {
-      this.clientservice.ajoutertype(tt);
+      //this.clientservice.ajoutertype(tt);
     }
     else{
       const index = this.t.findIndex((type) => type.idtype === tt.idtype);
@@ -38,7 +38,7 @@ export class ListetypeComponent implements OnInit {
 
 }
   chargertype():void{
-    this.t = this.clientservice.listetype();
+    //this.t = this.clientservice.listetype();
     console.log(this.t);  
   }
   updatetype(tt : Type)
